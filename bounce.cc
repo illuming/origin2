@@ -1,7 +1,7 @@
 #include <iostream>
 
-int maxColumn = 80;
-int minColumn = 0;
+const int maxColumn = 80;
+const int minColumn = 0;
 
 void draw(double position, char symbol){
   for (int i = 0; i < position; i++) {
