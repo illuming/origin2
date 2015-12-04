@@ -11,14 +11,14 @@ void draw(double position, char symbol){
 }
 
 
-void move (double &position, double &speed){ 
-  position += speed;
-  if (position >= maxColumn) {
-    position = maxColumn;
-    speed = -speed;
-  } else if (position < minColumn) {
-    position = minColumn;
-    speed = -speed;
+void move (double *position, double *speed){ 
+  *position += *speed;
+  if (*position >= maxColumn) {
+    *position = maxColumn;
+    *speed = -*speed;
+  } else if (*position < minColumn) {
+    *position = minColumn;
+    *speed = -*speed;
   }
 }
 
@@ -30,11 +30,13 @@ int main() {
 
   int timeStep = 0;
   int stopTime = 60;
- 
+
+
   while (timeStep < stopTime) {
 
+  
     draw (particlePosition, particleSymbol);
-    move (particlePosition, particleSpeed);
+    move (&particlePosition, &particleSpeed);
 
     timeStep++;
 
