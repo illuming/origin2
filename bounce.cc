@@ -1,5 +1,3 @@
-// N.B. This program contains a bug, on purpose.
-
 #include <iostream>
 
 int main() {
@@ -21,7 +19,7 @@ int main() {
     if (particlePosition >= maxColumn) {
       particlePosition = maxColumn;
       particleSpeed = -particleSpeed;
-    } else if (particleSpeed < 0) {
+    } else if (particlePosition < 0) {
       particlePosition = 0;
       particleSpeed = -particleSpeed;
     }    
