@@ -3,7 +3,12 @@
 const int maxColumn = 80;
 const int minColumn = 0;
 
+const int n_particles = 3;
+
 char screen [80];
+double Positions [n_particles]={0, 0, 0};
+double Speeds [n_particles]={6.3, 6.3, 6.3};
+char Symbols [n_particles] = {'x', 'y', 'z'};
 
 void draw(double position, char symbol){
 
@@ -32,24 +37,15 @@ double move (double position, double &speed){
 }
 
 int main() {
-  char particleSymbol = 'x';
-  double particlePosition = 0;
-  double particleSpeed = 6.3;
-
   int timeStep = 0;
   int stopTime = 60;
 
-  char particleSymbol2 = 'y';
-  double particlePosition2 = 0;
-  double particleSpeed2 = 6.3;
-
   while (timeStep < stopTime) {
   
-    draw (particlePosition, particleSymbol);
-    particlePosition = move (particlePosition, particleSpeed);
-
-    draw (particlePosition2, particleSymbol2);
-    particlePosition2 = move (particlePosition2, particleSpeed2);
+    for (int i=0; i<n_particles; i++){
+    draw (Positions[i], Symbols[i]);
+    Positions[i] = move (Positions[i], Speeds[i]);
+    }
 
     timeStep++;
 
