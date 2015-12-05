@@ -45,7 +45,7 @@ int main() {
   int timeStep = 0;
   int stopTime = 60;
 
-  char screen [maxColumn+1];
+  char *screen = new char[maxColumn+1];
 
   while (timeStep < stopTime) {
   
@@ -58,5 +58,7 @@ int main() {
 
     timeStep++;
   }
+
+  delete [] screen;
 
 }
