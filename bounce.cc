@@ -3,11 +3,18 @@
 const int maxColumn = 80;
 const int minColumn = 0;
 
+char screen [80];
+
 void draw(double position, char symbol){
   for (int i = 0; i < position; i++) {
-    std::cout << " ";
+    screen[i] = ' ';
   }
-  std::cout << symbol << std::endl;
+  screen[(int) position]= symbol;
+
+  for (int i = 0; i < position; i++) {
+    std::cout << screen[i] ;
+  }
+  std::cout<<"\n";
 }
 
 
@@ -33,7 +40,6 @@ int main() {
 
 
   while (timeStep < stopTime) {
-
   
     draw (particlePosition, particleSymbol);
     particlePosition = move (particlePosition, particleSpeed);
