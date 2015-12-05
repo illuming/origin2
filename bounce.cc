@@ -5,12 +5,12 @@ const int minColumn = 0;
 
 const int n_particles = 3;
 
-char screen [80];
 double Positions [n_particles]={0, 0, 0};
 double Speeds [n_particles]={6.3, 6.3, 6.3};
 char Symbols [n_particles] = {'x', 'y', 'z'};
 
 void draw(double position, char symbol){
+char screen [maxColumn+1];
 
   for (int i = 0; i < position; i++) {
     screen[i] = ' ';
@@ -18,9 +18,10 @@ void draw(double position, char symbol){
   screen[(int) position]= symbol;
 
   for (int i = 0; i <= position; i++) {
-    std::cout << screen[i] ;
+    std::cout << screen[i];
   }
   std::cout<<"\n";
+  
 }
 
 
