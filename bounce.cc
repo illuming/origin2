@@ -17,11 +17,11 @@ struct Particle {
     m_speed = sp;  
   }
 
-  void m_draw (char screen[]){
+  void m_draw (char screen[]) const {
     for (int i = 0; i < m_position; i++) {
       screen[i] = ' ';
     }
-    screen[(int) m_position]= m_symbol; 
+    screen[(int) m_position]= m_symbol;
   }
 
   void m_move (){ 
