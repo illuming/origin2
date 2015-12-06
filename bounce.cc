@@ -17,23 +17,22 @@ struct Particle {
   double speed;
 };
 
-void draw(Particle p, char screen[]){
-  for (int i = 0; i < p.position; i++) {
+void draw(Particle const * const p, char screen[]){
+  for (int i = 0; i < (*p).position; i++) {
     screen[i] = ' ';
   }
-  screen[(int) p.position]= p.symbol; 
+  screen[(int) (*p).position]= (*p).symbol; 
 }
 
-Particle move (Particle p){ 
-  p.position += p.speed;
-  if (p.position >= maxColumn) {
-    p.position = maxColumn;
-    p.speed = -p.speed;
-  } else if (p.position < minColumn) {
-    p.position = minColumn;
-    p.speed = -p.speed;
+void move (Particle * const p){ 
+  (*p).position += (*p).speed;
+  if ((*p).position >= maxColumn) {
+    (*p).position = maxColumn;
+    (*p).speed = -(*p).speed;
+  } else if ((*p).position < minColumn) {
+    (*p).position = minColumn;
+    (*p).speed = -(*p).speed;
   }
-  return p;
 }
 
 void display_screen (Particle p, char *screen){
@@ -66,10 +65,10 @@ int main() {
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
-      draw (particles[i], screen);
+      draw (&(particles[i]), screen);
       display_screen (particles[i], screen);
       clear_screen (particles[i], screen);
-      particles[i] =  move (particles[i]);
+      move (&(particles[i]));
     }
 
     timeStep++;
