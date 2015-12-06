@@ -5,11 +5,6 @@ const int minColumn = 0;
 
 const int n_particles = 3;
 
-/*
-double Positions [n_particles]={0, 0, 0};
-double Speeds [n_particles]={6.3, 6.3, 6.3};
-char Symbols [n_particles] = {'x', 'y', 'z'};
-*/
 
 struct Particle {
   char symbol;
@@ -35,15 +30,15 @@ void move (Particle * const p){
   }
 }
 
-void display_screen (Particle p, char *screen){
-  for (int j = 0; j <= p.position; j++) {
+void display_screen (Particle const * const p, char *screen){
+  for (int j = 0; j <= (*p).position; j++) {
     std::cout << screen[j];
   }
   std::cout<<"\n";
 }
 
-void clear_screen (Particle p, char *screen) {
-  for (int j = 0; j <= p.position; j++) {
+void clear_screen (Particle const * const p, char *screen) {
+  for (int j = 0; j <= (*p).position; j++) {
     screen[j] = ' ';
   }
 }
@@ -66,8 +61,8 @@ int main() {
   
     for (int i=0; i<n_particles; i++){
       draw (&(particles[i]), screen);
-      display_screen (particles[i], screen);
-      clear_screen (particles[i], screen);
+      display_screen (&(particles[i]), screen);
+      clear_screen (&(particles[i]), screen);
       move (&(particles[i]));
     }
 
