@@ -12,7 +12,13 @@ struct Particle {
   double speed;
 };
 
-void draw(Particle const * const p, char screen[]){
+void initialize (Particle * const p, char sy, double po, double sp){
+  p->symbol = sy;
+  p->position = po;
+  p->speed = sp;  
+}
+
+void draw (Particle const * const p, char screen[]){
   for (int i = 0; i < p->position; i++) {
     screen[i] = ' ';
   }
@@ -51,11 +57,9 @@ int main() {
 
   Particle particles [n_particles];
 
-  particles[0].symbol = 'x';
-  particles[1].symbol = 'y';
-  particles[2].symbol = 'z'; 
-  particles[0].position = particles[1].position = particles[2].position = 0;
-  particles[0].speed = particles[1].speed = particles[2].speed = 6.3;
+  initialize (&particles[0], 'x', 0, 6.3);
+  initialize (&particles[1], 'y', 0, 6.3);
+  initialize (&particles[2], 'z', 0, 6.3);
 
   while (timeStep < stopTime) {
   
