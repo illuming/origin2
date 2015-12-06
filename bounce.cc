@@ -10,31 +10,31 @@ struct Particle {
   char symbol;
   double position;
   double speed;
+  
+  void initialize (Particle * const p, char sy, double po, double sp){
+    p->symbol = sy;
+    p->position = po;
+    p->speed = sp;  
+  }
+
+  void draw (Particle const * const p, char screen[]){
+    for (int i = 0; i < p->position; i++) {
+      screen[i] = ' ';
+    }
+    screen[(int) p->position]= p->symbol; 
+  }
+
+  void move (Particle * const p){ 
+    p->position += p->speed;
+    if (p->position >= maxColumn) {
+      p->position = maxColumn;
+      p->speed = -p->speed;
+    } else if (p->position < minColumn) {
+      p->position = minColumn;
+      p->speed = -p->speed;
+    }
+  }
 };
-
-void initialize (Particle * const p, char sy, double po, double sp){
-  p->symbol = sy;
-  p->position = po;
-  p->speed = sp;  
-}
-
-void draw (Particle const * const p, char screen[]){
-  for (int i = 0; i < p->position; i++) {
-    screen[i] = ' ';
-  }
-  screen[(int) p->position]= p->symbol; 
-}
-
-void move (Particle * const p){ 
-  p->position += p->speed;
-  if (p->position >= maxColumn) {
-    p->position = maxColumn;
-    p->speed = -p->speed;
-  } else if (p->position < minColumn) {
-    p->position = minColumn;
-    p->speed = -p->speed;
-  }
-}
 
 void display_screen (Particle const * const p, char *screen){
   for (int j = 0; j <= p->position; j++) {
@@ -57,17 +57,17 @@ int main() {
 
   Particle particles [n_particles];
 
-  initialize (&particles[0], 'x', 0, 6.3);
-  initialize (&particles[1], 'y', 0, 6.3);
-  initialize (&particles[2], 'z', 0, 6.3);
+  particles[0].initialize (&particles[0], 'x', 0, 6.3);
+  particles[1].initialize (&particles[1], 'y', 0, 6.3);
+  particles[2].initialize (&particles[2], 'z', 0, 6.3);
 
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
-      draw (&particles[i], screen);
+      particles[i].draw (&particles[i], screen);
       display_screen (&particles[i], screen);
       clear_screen (&particles[i], screen);
-      move (&particles[i]);
+      particles[i].move (&particles[i]);
     }
 
     timeStep++;
