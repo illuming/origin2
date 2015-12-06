@@ -7,9 +7,9 @@ const int n_particles = 3;
 
 
 struct Particle {
-  char m_symbol;
-  double m_position;
-  double m_speed;
+  char mutable m_symbol;
+  double mutable m_position;
+  double mutable m_speed;
   
   void m_initialize (char sy, double po, double sp){
     m_symbol = sy;
