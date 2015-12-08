@@ -10,10 +10,8 @@ class Screen {
   char *m_screen_;
 
 public:
-  void m_initialize (){
-    m_screen_ = new char[maxColumn+1];
-  }
-
+  Screen ();
+  
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
       std::cout << m_screen_[j];
@@ -46,6 +44,9 @@ public:
 
 };
 
+Screen::Screen (){
+  m_screen_ = new char[maxColumn+1];
+}
 
 class Particle {
  
@@ -105,7 +106,7 @@ int main() {
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
-      screen.m_initialize();
+      //screen.m_initialize();
       particles[i].m_draw (screen);
       screen.m_display_screen ((particles[i].m_position()));
       screen.m_clear_screen ((particles[i].m_position()));
@@ -117,5 +118,3 @@ int main() {
 
   screen.m_delete();
 }
-
-    
