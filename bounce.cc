@@ -7,27 +7,41 @@ const int n_particles = 3;
 
 struct Screen {
 
-  char *m_screen;
+private:
+  char *m_screen_;
 
+public:
   void m_initialize (){
-    m_screen = new char[maxColumn+1];
+    m_screen_ = new char[maxColumn+1];
   }
 
   void m_display_screen (double *p){
     for (int j = 0; j <= *p; j++) {
-      std::cout << m_screen[j];
+      std::cout << m_screen_[j];
     }
     std::cout<<"\n";
   }
 
   void m_clear_screen (double *p) {
     for (int j = 0; j <= *p; j++) {
-      m_screen[j] = ' ';
+      m_screen_[j] = ' ';
     }
   }
 
   void m_delete (){
-  delete [] m_screen;
+    delete [] m_screen_;
+  }
+
+  char m_screen(){
+    return *m_screen_;
+  }
+
+  void m_put (double p, char s){
+    
+    for (int i = 0; i < p; i++) {
+      m_screen_[i] = ' ';
+    }
+    m_screen_[(int) p]= s;
   }
 
 };
@@ -45,11 +59,9 @@ struct Particle {
   }
 
   void m_draw (Screen screen) const {
-    for (int i = 0; i < m_position; i++) {
-      screen.m_screen[i] = ' ';
-    }
-    screen.m_screen[(int) m_position]= m_symbol;
-  }
+
+    screen.m_put(m_position, m_symbol);  
+}
 
   void m_move (){ 
     m_position += m_speed;
