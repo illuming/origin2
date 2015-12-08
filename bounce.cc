@@ -10,7 +10,7 @@ class Screen {
   char *m_screen_;
 
 public:
-  Screen ();
+  Screen (int);
   
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
@@ -44,8 +44,8 @@ public:
 
 };
 
-Screen::Screen (){
-  m_screen_ = new char[maxColumn+1];
+Screen::Screen (int screenWidth){
+  m_screen_ = new char[screenWidth];
 }
 
 class Particle {
@@ -95,7 +95,7 @@ int main() {
   int timeStep = 0;
   int stopTime = 60;
 
-  Screen screen;
+  Screen screen(maxColumn+1);
 
   Particle particles [n_particles];
 
