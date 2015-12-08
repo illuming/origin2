@@ -5,6 +5,33 @@ const int minColumn = 0;
 
 const int n_particles = 3;
 
+struct Screen {
+
+  char *m_screen;
+
+  void m_initialize (){
+    m_screen = new char[maxColumn+1];
+  }
+
+  void m_display_screen (double *p){
+    for (int j = 0; j <= *p; j++) {
+      std::cout << m_screen[j];
+    }
+    std::cout<<"\n";
+  }
+
+  void m_clear_screen (double *p) {
+    for (int j = 0; j <= *p; j++) {
+      m_screen[j] = ' ';
+    }
+  }
+
+  void m_delete (){
+  delete [] m_screen;
+  }
+
+};
+
 
 struct Particle {
   char mutable m_symbol;
@@ -17,11 +44,11 @@ struct Particle {
     m_speed = sp;  
   }
 
-  void m_draw (char screen[]) const {
+  void m_draw (Screen screen) const {
     for (int i = 0; i < m_position; i++) {
-      screen[i] = ' ';
+      screen.m_screen[i] = ' ';
     }
-    screen[(int) m_position]= m_symbol;
+    screen.m_screen[(int) m_position]= m_symbol;
   }
 
   void m_move (){ 
@@ -36,24 +63,11 @@ struct Particle {
   }
 };
 
-void display_screen (Particle const * const p, char *screen){
-  for (int j = 0; j <= p->m_position; j++) {
-    std::cout << screen[j];
-  }
-  std::cout<<"\n";
-}
-
-void clear_screen (Particle const * const p, char *screen) {
-  for (int j = 0; j <= p->m_position; j++) {
-    screen[j] = ' ';
-  }
-}
-
 int main() {
   int timeStep = 0;
   int stopTime = 60;
 
-  char *screen = new char[maxColumn+1];
+  Screen screen;
 
   Particle particles [n_particles];
 
@@ -64,14 +78,17 @@ int main() {
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
+      screen.m_initialize();
       particles[i].m_draw (screen);
-      display_screen (&particles[i], screen);
-      clear_screen (&particles[i], screen);
+      screen.m_display_screen (&(particles[i].m_position));
+      screen.m_clear_screen (&(particles[i].m_position));
       particles[i].m_move ();
     }
 
     timeStep++;
   }
 
-  delete [] screen;
+  screen.m_delete();
 }
+
+    
