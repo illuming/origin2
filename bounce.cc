@@ -11,6 +11,8 @@ class Screen {
 
 public:
   Screen (int);
+  Screen (const Screen &obj);
+  ~Screen ();
   
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
@@ -24,10 +26,6 @@ public:
       m_screen_[j] = ' ';
 
     }
-  }
-
-  void m_delete (){
-    delete [] m_screen_;
   }
 
   char m_screen(){
@@ -46,6 +44,14 @@ public:
 
 Screen::Screen (int screenWidth){
   m_screen_ = new char[screenWidth];
+}
+
+Screen::Screen (const Screen &obj){
+  m_screen_ = obj.m_screen_; 
+}
+
+Screen::~Screen (){
+  delete [] m_screen_;
 }
 
 class Particle {
@@ -74,7 +80,7 @@ public:
     m_speed_ = sp;  
   }
 
-  void m_draw (Screen screen) const {
+  void m_draw (Screen &screen) const {
 
     screen.m_put(m_position_, m_symbol_);  
 }
@@ -92,6 +98,7 @@ public:
 };
 
 int main() {
+
   int timeStep = 0;
   int stopTime = 60;
 
@@ -106,7 +113,6 @@ int main() {
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
-      //screen.m_initialize();
       particles[i].m_draw (screen);
       screen.m_display_screen ((particles[i].m_position()));
       screen.m_clear_screen ((particles[i].m_position()));
@@ -116,5 +122,4 @@ int main() {
     timeStep++;
   }
 
-  screen.m_delete();
 }
