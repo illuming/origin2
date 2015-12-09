@@ -13,7 +13,7 @@ public:
   Screen (int);
   Screen (const Screen &obj);
   ~Screen ();
-  
+
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
       std::cout << m_screen_[j];
@@ -64,6 +64,13 @@ public:
 
   Particle (char sy, double po, double sp)
     :m_symbol_(sy), m_position_(po), m_speed_(sp){
+  }
+
+  Particle & operator= (const Particle& other){
+    m_symbol_ = other.m_symbol_;
+    m_position_ = other.m_position_;
+    m_speed_ = other.m_speed_;
+    return *this;
   }
 
   char m_symbol (){
