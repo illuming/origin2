@@ -10,17 +10,9 @@ class Screen {
   char *m_screen_;
 
 public:
-  Screen (int screenWidth)
-    : m_screen_ (new char[screenWidth]){  
-  }
-
-  Screen (const Screen &obj){
-    m_screen_ = obj.m_screen_; 
-  }
-
-  ~Screen (){
-    delete [] m_screen_;
-  }
+  Screen (int);
+  Screen (const Screen &obj);
+  ~Screen ();
   
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
@@ -49,7 +41,7 @@ public:
   }
 
 };
-/*
+
 Screen::Screen (int screenWidth){
   m_screen_ = new char[screenWidth];
 }
@@ -61,7 +53,7 @@ Screen::Screen (const Screen &obj){
 Screen::~Screen (){
   delete [] m_screen_;
 }
-*/
+
 class Particle {
  
   char mutable m_symbol_;
@@ -69,6 +61,10 @@ class Particle {
   double mutable m_speed_;
  
 public:
+
+  Particle (char sy, double po, double sp)
+    :m_symbol_(sy), m_position_(po), m_speed_(sp){
+  }
 
   char m_symbol (){
     return m_symbol_;
@@ -81,13 +77,13 @@ public:
   double m_speed (){
     return m_speed_;
   }
- 
+  /* 
   void m_initialize (char sy, double po, double sp){
     m_symbol_ = sy;
     m_position_ = po;
     m_speed_ = sp;  
   }
-
+  */
   void m_draw (Screen &screen) const {
 
     screen.m_put(m_position_, m_symbol_);  
@@ -112,12 +108,14 @@ int main() {
 
   Screen screen(maxColumn+1);
 
-  Particle particles [n_particles];
+  Particle particles [n_particles] = {
+    Particle('x', 0, 6.3),   Particle('y', 0, 6.3) ,  Particle('z', 0, 6.3)};
 
+  /*
   particles[0].m_initialize ('x', 0, 6.3);
   particles[1].m_initialize ('y', 0, 6.3);
   particles[2].m_initialize ('z', 0, 6.3);
-
+  */
   while (timeStep < stopTime) {
   
     for (int i=0; i<n_particles; i++){
