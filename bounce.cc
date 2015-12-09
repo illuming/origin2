@@ -10,9 +10,17 @@ class Screen {
   char *m_screen_;
 
 public:
-  Screen (int);
-  Screen (const Screen &obj);
-  ~Screen ();
+  Screen (int screenWidth)
+    : m_screen_ (new char[screenWidth]){  
+  }
+
+  Screen (const Screen &obj){
+    m_screen_ = obj.m_screen_; 
+  }
+
+  ~Screen (){
+    delete [] m_screen_;
+  }
   
   void m_display_screen (double p){
     for (int j = 0; j <= p; j++) {
@@ -41,7 +49,7 @@ public:
   }
 
 };
-
+/*
 Screen::Screen (int screenWidth){
   m_screen_ = new char[screenWidth];
 }
@@ -53,7 +61,7 @@ Screen::Screen (const Screen &obj){
 Screen::~Screen (){
   delete [] m_screen_;
 }
-
+*/
 class Particle {
  
   char mutable m_symbol_;
