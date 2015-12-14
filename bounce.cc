@@ -2,6 +2,7 @@
 #include <fstream>
 #include "Screen.h"
 #include "Particle.h"
+#include "Array.h"
 
 int main() {
 
@@ -15,7 +16,7 @@ int main() {
   if (!in) std::cerr<<"Could not open file"<<std::endl;
   else in>> n_particles;
 
-  Particle *particles = new Particle [n_particles];
+  Array particles(n_particles);
 
   for (int i=0; i<n_particles; i++){
     char symbol;
@@ -25,22 +26,21 @@ int main() {
     in>>symbol;
     in>>position;
     in>>speed;
-
-    particles[i] = Particle(symbol, position, speed);
+    
+    particles.m_particles_[i]=Particle(symbol, position, speed);
   }
 
   while (timeStep < stopTime) {
-    
+        
     for (int i=0; i<n_particles; i++){
-      particles[i].m_draw (screen);
-      screen.m_display_screen ((particles[i].m_position()));
-      screen.m_clear_screen ((particles[i].m_position()));
-      particles[i].m_move ();
+      particles.m_particles_[i].m_draw (screen);
+      screen.m_display_screen (particles.m_particles_[i].m_position());
+      screen.m_clear_screen ((particles.m_particles_[i].m_position()));
+      particles.m_particles_[i].m_move ();
     }
     
     timeStep++;
   }
 
-  delete [] particles;
 
 }
