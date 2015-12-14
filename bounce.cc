@@ -14,32 +14,10 @@ public:
   Screen (const Screen &obj);
   ~Screen ();
 
-  void m_display_screen (double p){
-    for (int j = 0; j <= p; j++) {
-      std::cout << m_screen_[j];
-    }
-    std::cout<<"\n";
-  }
-
-  void m_clear_screen (double p) {
-    for (int j = 0; j <= p; j++) {
-      m_screen_[j] = ' ';
-
-    }
-  }
-
-  char m_screen(){
-    return *m_screen_;
-  }
-
-  void m_put (double p, char s){
-    
-    for (int i = 0; i < p; i++) {
-      m_screen_[i] = ' ';
-    }
-    m_screen_[(int) p]= s;
-  }
-
+  void m_display_screen (double);
+  void m_clear_screen (double);
+  char m_screen ();
+  void m_put (double, char);
 };
 
 Screen::Screen (int screenWidth){
@@ -54,6 +32,31 @@ Screen::~Screen (){
   delete [] m_screen_;
 }
 
+void Screen::m_display_screen (double p){
+    for (int j = 0; j <= p; j++) {
+      std::cout << m_screen_[j];
+    }
+    std::cout<<"\n";
+  }
+
+void Screen::m_clear_screen (double p) {
+    for (int j = 0; j <= p; j++) {
+      m_screen_[j] = ' ';
+    }
+  }
+
+char Screen::m_screen(){
+    return *m_screen_;
+  }
+
+void Screen::m_put (double p, char s){
+    for (int i = 0; i < p; i++) {
+      m_screen_[i] = ' ';
+    }
+    m_screen_[(int) p]= s;
+  }
+
+
 class Particle {
  
   char mutable m_symbol_;
@@ -62,9 +65,7 @@ class Particle {
  
 public:
 
-  Particle (char sy, double po, double sp)
-    :m_symbol_(sy), m_position_(po), m_speed_(sp){
-  }
+  Particle (char, double, double);
 
   Particle & operator= (const Particle& other){
     m_symbol_ = other.m_symbol_;
@@ -73,30 +74,28 @@ public:
     return *this;
   }
 
-  char m_symbol (){
-    return m_symbol_;
-  }
-  
-  double m_position (){
-    return m_position_;
-  }
-  
-  double m_speed (){
-    return m_speed_;
-  }
-  /* 
-  void m_initialize (char sy, double po, double sp){
-    m_symbol_ = sy;
-    m_position_ = po;
-    m_speed_ = sp;  
-  }
-  */
-  void m_draw (Screen &screen) const {
+  char m_symbol();
+  double m_position();
+  double m_speed();
+  void m_draw(Screen &screen) const;
+  void m_move();
+};
 
-    screen.m_put(m_position_, m_symbol_);  
+Particle::Particle (char sy, double po, double sp)
+  :m_symbol_(sy), m_position_(po), m_speed_(sp){
 }
 
-  void m_move (){ 
+char Particle::m_symbol (){return m_symbol_;}
+  
+double Particle::m_position (){return m_position_;}
+  
+double Particle::m_speed (){return m_speed_;}
+  
+void Particle::m_draw (Screen &screen) const {
+  screen.m_put(m_position_, m_symbol_);  
+}
+
+void Particle::m_move (){ 
     m_position_ += m_speed_;
     if (m_position_ >= maxColumn) {
       m_position_ = maxColumn;
@@ -105,8 +104,7 @@ public:
       m_position_ = minColumn;
       m_speed_ = -m_speed_;
     }
-  }
-};
+}
 
 int main() {
 
