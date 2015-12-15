@@ -2,28 +2,7 @@
 #include <fstream>
 #include "Screen.h"
 #include "Particle.h"
-//#include "Array.h"
-
-template <typename T>
-class Array2 {
-public:
-  T *m_particles_;
-
-  Array2();
-  Array2 (int);
-  ~Array2();
-  T m_particles();
-};
-
-template<typename T>
-Array2<T>::Array2(){}
-template<typename T>
-Array2<T>::Array2(int a) : m_particles_(new Particle [a]){};
-template<typename T>
-Array2<T>::~Array2(void){delete [] m_particles_;}
-template<typename T>
-T Array2<T>::m_particles (){ return *m_particles_;}
-
+#include "Array.h"
 
 int main() {
 
@@ -37,7 +16,7 @@ int main() {
   if (!in) std::cerr<<"Could not open file"<<std::endl;
   else in>> n_particles;
 
-  Array2 <Particle> particles(n_particles);
+  Array <Particle> particles(n_particles);
 
   for (int i=0; i<n_particles; i++){
     char symbol;
