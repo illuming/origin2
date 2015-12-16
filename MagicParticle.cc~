@@ -1,0 +1,31 @@
+#include <iostream>
+#include "MagicParticle.h"
+
+
+MagicParticle::MagicParticle(){}
+
+MagicParticle::MagicParticle (char sy, double po, double sp)
+  :m_symbol_(sy), m_position_(po), m_speed_(sp){}
+
+char MagicParticle::m_symbol (){return m_symbol_;}
+  
+double MagicParticle::m_position (){return m_position_;}
+  
+double MagicParticle::m_speed (){return m_speed_;}
+  
+void MagicParticle::m_draw (Screen &screen) const {
+  screen.m_put(m_position_, m_symbol_);  
+}
+
+void MagicParticle::m_move (){ 
+    m_position_ += m_speed_;
+    if (m_position_ >= maxColumn) {
+      m_position_ = 0;
+      m_speed_ = m_speed_;
+    } 
+
+    //else if (m_position_ < minColumn) {
+    // m_position_ = minColumn;
+    // m_speed_ = -m_speed_;
+    //}
+}

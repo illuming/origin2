@@ -7,12 +7,12 @@ const int maxColumn = 80;
 const int minColumn = 0;
 
 class Particle {
- 
+
+ public: 
   char mutable m_symbol_;
   double mutable m_position_;
   double mutable m_speed_;
- 
-public:
+
 
   Particle (char, double, double);
 
@@ -32,4 +32,21 @@ public:
   void m_move();
 };
 
+class MagicParticle: public Particle {
+ public:
+  MagicParticle (char, double, double);
+
+  MagicParticle ();
+
+  MagicParticle & operator= (const MagicParticle& other){
+    m_symbol_ = other.m_symbol_;
+    m_position_ = other.m_position_;
+    m_speed_ = other.m_speed_;
+    return *this;
+  }
+
+  void m_move();
+};
+
 #endif
+

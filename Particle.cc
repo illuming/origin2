@@ -27,3 +27,24 @@ void Particle::m_move (){
       m_speed_ = -m_speed_;
     }
 }
+
+
+
+MagicParticle::MagicParticle(){}
+
+MagicParticle::MagicParticle (char sy, double po, double sp){
+  m_symbol_=sy;
+  m_position_=po;
+  m_speed_=sp;
+}
+
+void MagicParticle::m_move(){
+    m_position_ += m_speed_;
+    if (m_position_ >= maxColumn) {
+      m_position_ = minColumn;
+      m_speed_ = m_speed_;
+    } else if (m_position_ < minColumn) {
+      m_position_ = maxColumn;
+      m_speed_ = m_speed_;
+    }
+}

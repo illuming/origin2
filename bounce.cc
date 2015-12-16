@@ -4,36 +4,7 @@
 #include "Screen.h"
 #include "Particle.h"
 #include "Array.h"
-
-/*
-template <typename T>
-class Array {
-public:
-  std::vector <T> m_particles_;
-
-  Array();
-  Array (int);
-  ~Array();
-
-  int Size();
-  int Capacity();
-
-};
-
-template<typename T>
-Array<T>::Array(){}
-template<typename T>
-Array<T>::Array(int a){m_particles_.reserve(a);}
-template<typename T>
-//Array<T>::Array(int a){m_particles_.resize(a);}
-//template<typename T>
-int Array<T>::Size(){return m_particles_.size();}
-template<typename T>
-int Array<T>::Capacity(){return m_particles_.capacity();}
-template<typename T>
-Array<T>::~Array(void){}
-*/
-
+  
 int main() {
   
   int timeStep = 0;
@@ -46,7 +17,7 @@ int main() {
   if (!in) std::cerr<<"Could not open file"<<std::endl;
   else in>> n_particles;
 
-  Array <Particle> particles(n_particles);
+  Array <MagicParticle> particles(n_particles);
 
   for (int i=0; i<n_particles; i++){
     char symbol;
@@ -57,7 +28,7 @@ int main() {
     in>>position;
     in>>speed;
 
-    particles.m_particles_.push_back(Particle(symbol, position, speed)); //*   se il constructor di Array(int) contiene reserve(int) 
+    particles.m_particles_.push_back(MagicParticle(symbol, position, speed)); //*   se il constructor di Array(int) contiene reserve(int) 
     //particles.m_particles_[i]=Particle(symbol, position, speed);   *se il constructor di Array(int) contiene resize(int)
   }
 
